@@ -18,6 +18,16 @@ else
     echo "PLEAS RUN AS ROOT (sudo)"
     exit 1
 fi
+apt-get install zsh
+chsh -s $(which zsh)
+if [ $? -eq 0 ]
+then
+    echo "___________________________"
+    echo "DONE INSTALLING ZSH"
+else
+    echo "___________________________"
+    echo "ZSH not installed"
+fi
 apt-get install git -y
 if [ $? -eq 0 ]
 then
@@ -25,7 +35,7 @@ then
     echo "DONE INSTALLING GIT"
 else
     echo "___________________________"
-    echo "git not installed"
+    echo "GIT not installed"
 fi
 #install plugins
 echo "___________________________"
