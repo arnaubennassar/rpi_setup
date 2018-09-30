@@ -65,7 +65,7 @@ done
 if [ "$spotyfy_response" = "yes" ];
 then
   echo "___________________________"
-  echo "INSTALLING SPOTIFY
+  echo "INSTALLING SPOTIFY"
   curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
   if [ $? -eq 0 ]
   then
