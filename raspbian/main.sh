@@ -20,29 +20,6 @@ else
     echo "PLEAS RUN AS ROOT (sudo)"
     exit 1
 fi
-echo "___________________________"
-echo "INSTALLING ZSH"
-apt-get install zsh
-chsh -s $(which zsh)
-if [ $? -eq 0 ]
-then
-    echo "___________________________"
-    echo "DONE INSTALLING ZSH"
-else
-    echo "___________________________"
-    echo "ZSH not installed"
-    echo "___________________________"
-fi
-echo "INSTALLING OH-MY-ZSH"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
-if [ $? -eq 0 ]
-then
-    echo "___________________________"
-    echo "DONE INSTALLING OH-MY-ZSH"
-else
-    echo "___________________________"
-    echo "OH-MY-ZSH not installed"
-fi
 apt-get install git -y
 if [ $? -eq 0 ]
 then
@@ -79,5 +56,27 @@ then
       echo "SPOTIFY NOT INSTALLED :("
   fi
 fi
-echo "DONE!! LET'S REBOOT"
-reboot
+echo "___________________________"
+echo "INSTALLING ZSH"
+apt-get install zsh
+chsh -s $(which zsh)
+if [ $? -eq 0 ]
+then
+    echo "___________________________"
+    echo "DONE INSTALLING ZSH"
+else
+    echo "___________________________"
+    echo "ZSH not installed"
+    echo "___________________________"
+fi
+echo "INSTALLING OH-MY-ZSH"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+if [ $? -eq 0 ]
+then
+    echo "___________________________"
+    echo "DONE INSTALLING OH-MY-ZSH"
+else
+    echo "___________________________"
+    echo "OH-MY-ZSH not installed"
+fi
+return 0
