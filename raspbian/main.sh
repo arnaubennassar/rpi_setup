@@ -32,6 +32,7 @@ else
     echo "___________________________"
     echo "ZSH not installed"
     echo "___________________________"
+fi
 echo "INSTALLING OH-MY-ZSH"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 if [ $? -eq 0 ]
