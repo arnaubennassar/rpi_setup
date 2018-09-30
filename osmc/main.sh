@@ -1,12 +1,121 @@
 #!/bin/bash
 #INIT
+
+transmission()
+{
+  transmission_user_response=nope
+  while [ "$transmission_user_response" != "yes" ]
+  do
+    echo "Username for transmisssion (torrent client)?"
+    read transmission_name
+    echo "Your transmission name will be: $transmission_name. Are you happy with it? (yes/no)"
+    read transmission_user_response
+  done
+  transmission_pass_response=nope
+  while [ "$transmission_pass_response" != "yes" ]
+  do
+    echo "Password for transmisssion (torrent client)?"
+    read transmission_pass
+    echo "Your transmission password will be: $transmission_pass. Are you happy with it? (yes/no)"
+    read transmission_pass_response
+  done
+  apt-get install apt-get install transmission-daemon -y
+  mkdir /media/$disk_name/DOWNLOADS
+  mkdir /media/$disk_name/incomplete_downloads
+  echo "{\n
+    \"alt-speed-down\": 50,\n
+    \"alt-speed-enabled\": false,\n
+    \"alt-speed-time-begin\": 540,\n
+    \"alt-speed-time-day\": 127,\n
+    \"alt-speed-time-enabled\": false,\n
+    \"alt-speed-time-end\": 1020,\n
+    \"alt-speed-up\": 50,\n
+    \"bind-address-ipv4\": \"0.0.0.0\",\n
+    \"bind-address-ipv6\": \"::\",\n
+    \"blocklist-enabled\": false,\n
+    \"blocklist-url\": \"http://www.example.com/blocklist\",\n
+    \"cache-size-mb\": 10,\n
+    \"dht-enabled\": true,\n
+    \"download-dir\": \"/media/$disk_name/DOWNLOADS\",\n
+    \"download-limit\": 100,\n
+    \"download-limit-enabled\": 0,\n
+    \"download-queue-enabled\": true,\n
+    \"download-queue-size\": 5,\n
+    \"encryption\": 1,\n
+    \"idle-seeding-limit\": 30,\n
+    \"idle-seeding-limit-enabled\": false,\n
+    \"incomplete-dir\": \"/media/$disk_name/incomplete_downloads\",\n
+    \"incomplete-dir-enabled\": true,\n
+    \"lpd-enabled\": false,\n
+    \"max-peers-global\": 200,\n
+    \"message-level\": 1,\n
+    \"peer-congestion-algorithm\": \"\",\n
+    \"peer-id-ttl-hours\": 6,\n
+    \"peer-limit-global\": 200,\n
+    \"peer-limit-per-torrent\": 50,\n
+    \"peer-port\": 51413,\n
+    \"peer-port-random-high\": 65535,\n
+    \"peer-port-random-low\": 49152,\n
+    \"peer-port-random-on-start\": false,\n
+    \"peer-socket-tos\": \"default\",\n
+    \"pex-enabled\": true,\n
+    \"port-forwarding-enabled\": false,\n
+    \"preallocation\": 2,\n
+    \"prefetch-enabled\": true,\n
+    \"queue-stalled-enabled\": true,\n
+    \"queue-stalled-minutes\": 30,\n
+    \"ratio-limit\": 2,\n
+    \"ratio-limit-enabled\": false,\n
+    \"rename-partial-files\": true,\n
+    \"rpc-authentication-required\": true,\n
+    \"rpc-bind-address\": \"0.0.0.0\",\n
+    \"rpc-enabled\": true,\n
+    \"rpc-host-whitelist\": \"\",\n
+    \"rpc-host-whitelist-enabled\": true,\n
+    \"rpc-password\": \"$transmission_pass\",\n
+    \"rpc-port\": 9091,\n
+    \"rpc-url\": \"/transmission/\",\n
+    \"rpc-username\": \"$transmission_name\",\n
+    \"rpc-whitelist\": \"*.*.*.*\",\n
+    \"rpc-whitelist-enabled\": true,\n
+    \"scrape-paused-torrents-enabled\": true,\n
+    \"script-torrent-done-enabled\": false,\n
+    \"script-torrent-done-filename\": \"\",\n
+    \"seed-queue-enabled\": false,\n
+    \"seed-queue-size\": 10,\n
+    \"speed-limit-down\": 100,\n
+    \"speed-limit-down-enabled\": false,\n
+    \"speed-limit-up\": 100,\n
+    \"speed-limit-up-enabled\": false,\n
+    \"start-added-torrents\": true,\n
+    \"trash-original-torrent-files\": false,\n
+    \"umask\": 2,\n
+    \"upload-limit\": 100,\n
+    \"upload-limit-enabled\": 0,\n
+    \"upload-slots-per-torrent\": 14,\n
+    \"utp-enabled\": true\n}"
+  chmod g+rw /media/$disk_name/incomplete_downloads
+  chgrp -R $SUDO_USER /media/$disk_name/DOWNLOADS
+  usermod -a -G $SUDO_USER debian-transmission
+  /etc/init.d/transmission-daemon start
+}
+final_output=""
 device_name_response=nope
+transmission_installed="false"
 while [ "$device_name_response" != "yes" ]
 do
   echo "Whats the name your gonna give to this device?"
   read device_name
   echo "Your device name will be: $device_name. Are you happy with it? (yes/no)"
   read device_name_response
+done
+disk_name_response=nope
+while [ "$disk_name_response" != "yes" ]
+do
+  echo "Whats the name of the disk? (put something random if you dont pretend to use any)"
+  read disk_name
+  echo "Your disk name will be: $device_name. Are you happy with it? (yes/no)"
+  read disk_name_response
 done
 #INSTALL mandatory stuff
 echo "___________________________"
@@ -72,6 +181,11 @@ do
 done
 if [ "$sickrage_response" = "yes" ];
 then
+  if [ "$transmission_installed" = "false" ];
+  then
+    transmission()
+    transmission_installed="true"
+  fi
   echo "___________________________"
   echo "INSTALING SICKRAGE!"
   echo "begining installing p7zip..."
@@ -126,6 +240,7 @@ then
   echo "password: osmc"
   echo " "
   echo "enjoy"
+  final_output="$final_output\nSICKRAGE:\n    user:osmc\n    pass:osmc\n    port:8081"
 fi
 
 
@@ -138,6 +253,11 @@ do
 done
 if [ "$radarr_response" = "yes" ];
 then
+  if [ "$transmission_installed" = "false" ];
+  then
+    transmission()
+    transmission_installed="true"
+  fi
   echo "___________________________"
   echo "INSTALING RADARR!"
   apt install mono-devel mediainfo sqlite3 libmono-cil-dev -y
@@ -151,6 +271,7 @@ then
   systemctl enable radarr
   systemctl start radarr
   echo "radarr installed acces it through the port :7878"
+  final_output="$final_output\nRADARR:\n    port:7878"
 fi
 
 
