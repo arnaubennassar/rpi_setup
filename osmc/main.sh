@@ -310,7 +310,7 @@ else
 fi
 echo "INSTALLING OH-MY-ZSH"
 runuser -l $SUDO_USER -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/coreycole/oh-my-zsh/master/tools/install.sh)"'
-chsh -s $(which zsh) $SUDO_USER
+# chsh -s $(which zsh) $SUDO_USER
 if [ $? -eq 0 ]
 then
     echo "___________________________"
