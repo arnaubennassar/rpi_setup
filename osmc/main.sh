@@ -20,7 +20,7 @@ transmission()
     echo "Your transmission password will be: $transmission_pass. Are you happy with it? (yes/no)"
     read transmission_pass_response
   done
-  apt-get install apt-get install transmission-daemon -y
+  apt-get install transmission-daemon -y
   mkdir /media/$disk_name/DOWNLOADS
   mkdir /media/$disk_name/incomplete_downloads
   echo "{\n
