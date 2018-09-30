@@ -94,7 +94,7 @@ transmission()
     \"upload-limit\": 100,\n
     \"upload-limit-enabled\": 0,\n
     \"upload-slots-per-torrent\": 14,\n
-    \"utp-enabled\": true\n}"
+    \"utp-enabled\": true\n}" >> /etc/transmission-daemon/settings.json
   chmod g+rw /media/$disk_name/incomplete_downloads
   chgrp -R $SUDO_USER /media/$disk_name/DOWNLOADS
   usermod -a -G $SUDO_USER debian-transmission
