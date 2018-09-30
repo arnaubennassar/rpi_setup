@@ -1,5 +1,13 @@
 #!/bin/bash
-
+#INIT
+device_name_response=nope
+while [ "$device_name_response" != "yes" ]
+do
+  echo "Whats the name your gonna give to this device?"
+  read device_name
+  echo "Your device name will be: $device_name. Are you happy with it? (yes/no)"
+  read device_name_response
+done
 #INSTALL mandatory stuff
 apt-get update -y
 if [ $? -eq 0 ]
@@ -35,6 +43,9 @@ then
   curl -sL https://dtcooper.github.io/raspotify/install.sh | sh
   if [ $? -eq 0 ]
   then
+      #Set max quality and device name
+      echo "DEVICE_NAME=\"$device_name\" \nBITRATE=\"320\"" >> /etc/default/raspotify
+      systemctl restart raspotify
       echo "DONE INSTALLING SPOTIFY!!"
   else
       echo "___________________________"
