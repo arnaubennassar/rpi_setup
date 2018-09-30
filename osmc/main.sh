@@ -3,12 +3,13 @@
 
 transmission()
 {
+  echo "FIRST LETS INSTALL TRANSMISSION"
   transmission_user_response=nope
   while [ "$transmission_user_response" != "yes" ]
   do
     echo "Username for transmisssion (torrent client)?"
-    read transmission_name
-    echo "Your transmission name will be: $transmission_name. Are you happy with it? (yes/no)"
+    read transmission_user
+    echo "Your transmission name will be: $transmission_user. Are you happy with it? (yes/no)"
     read transmission_user_response
   done
   transmission_pass_response=nope
@@ -75,7 +76,7 @@ transmission()
     \"rpc-password\": \"$transmission_pass\",\n
     \"rpc-port\": 9091,\n
     \"rpc-url\": \"/transmission/\",\n
-    \"rpc-username\": \"$transmission_name\",\n
+    \"rpc-username\": \"$transmission_user\",\n
     \"rpc-whitelist\": \"*.*.*.*\",\n
     \"rpc-whitelist-enabled\": true,\n
     \"scrape-paused-torrents-enabled\": true,\n
@@ -98,6 +99,7 @@ transmission()
   chgrp -R $SUDO_USER /media/$disk_name/DOWNLOADS
   usermod -a -G $SUDO_USER debian-transmission
   /etc/init.d/transmission-daemon start
+  final_output="$final_output\nTRANSMISSION:\n    user:$transmission_user\n    pass:$transmission_pass\n    port:8081"
 }
 final_output=""
 device_name_response=nope
@@ -114,7 +116,7 @@ while [ "$disk_name_response" != "yes" ]
 do
   echo "Whats the name of the disk? (put something random if you dont pretend to use any)"
   read disk_name
-  echo "Your disk name will be: $device_name. Are you happy with it? (yes/no)"
+  echo "Your disk name will be: $disk_name. Are you happy with it? (yes/no)"
   read disk_name_response
 done
 #INSTALL mandatory stuff
@@ -183,9 +185,25 @@ if [ "$sickrage_response" = "yes" ];
 then
   if [ "$transmission_installed" = "false" ];
   then
-    transmission()
+    transmission
     transmission_installed="true"
   fi
+  sickrage_user_response=nope
+  while [ "$sickrage_user_response" != "yes" ]
+  do
+    echo "Username for SiCKRAGE ?"
+    read sickrage_name
+    echo "Your SiCKRAGE name will be: $sickrage_name. Are you happy with it? (yes/no)"
+    read sickrage_user_response
+  done
+  sickrage_pass_response=nope
+  while [ "$sickrage_pass_response" != "yes" ]
+  do
+    echo "Password for sickrage?"
+    read sickrage_pass
+    echo "Your sickrage password will be: $sickrage_pass. Are you happy with it? (yes/no)"
+    read sickrage_pass_response
+  done
   echo "___________________________"
   echo "INSTALING SICKRAGE!"
   echo "begining installing p7zip..."
@@ -236,15 +254,15 @@ then
   echo " "
   echo "sickrage login info:"
   echo " "
-  echo "username: osmc"
-  echo "password: osmc"
+  echo "username: $sickrage_user"
+  echo "password: $sickrage_pass"
   echo " "
   echo "enjoy"
-  final_output="$final_output\nSICKRAGE:\n    user:osmc\n    pass:osmc\n    port:8081"
+  final_output="$final_output\nSICKRAGE:\n    user:$sickrage_user\n    pass:$sickrage_pass\n    port:8081"
 fi
 
 
-echo "LET'S GO FOR SICKRAGE!"
+echo "LET'S GO FOR RADARR!"
 radarr_response=nope
 while [ "$radarr_response" != "yes" ] && [ $radarr_response != "no" ]
 do
@@ -255,7 +273,7 @@ if [ "$radarr_response" = "yes" ];
 then
   if [ "$transmission_installed" = "false" ];
   then
-    transmission()
+    transmission
     transmission_installed="true"
   fi
   echo "___________________________"
@@ -291,7 +309,8 @@ else
     echo "___________________________"
 fi
 echo "INSTALLING OH-MY-ZSH"
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+runuser -l $SUDO_USER -c 'sh -c "$(curl -fsSL https://raw.githubusercontent.com/coreycole/oh-my-zsh/master/tools/install.sh)"'
+chsh -s $(which zsh) $SUDO_USER
 if [ $? -eq 0 ]
 then
     echo "___________________________"
@@ -300,4 +319,5 @@ else
     echo "___________________________"
     echo "OH-MY-ZSH not installed"
 fi
+echo final_output
 return 0
