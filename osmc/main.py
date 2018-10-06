@@ -48,9 +48,9 @@ if hf.do_you_want('Install CouchPotato? (Software to download movies)'):
         transmission_installed = True
     final_output += couchpotato.install()
 
-if hf.do_you_want('Install ZSH? (Cool terminal)'):
-    print("INSTALLING ZSH!")
-    zsh.install()
+# if hf.do_you_want('Install ZSH? (Cool terminal)'):
+#     print("INSTALLING ZSH!")
+#     zsh.install()
 
 with open(".credentials.txt", 'w') as new_file:
     new_file.write(final_output)
