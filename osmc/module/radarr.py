@@ -14,9 +14,10 @@ def install(user_name):
     After=syslog.target network.target
 
     [Service]
-    User="""+user_name+"""
+    User=osmc
     Group=osmc
-    Type=simpe
+
+    Type=simple
     ExecStart=/usr/bin/mono /opt/Radarr/Radarr.exe --nobrowser
     TimeoutStopSec=20
     KillMode=process
