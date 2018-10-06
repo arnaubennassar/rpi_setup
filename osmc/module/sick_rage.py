@@ -2,9 +2,9 @@ import helper_functions as hf
 import os
 
 def install(user_name):
-    if os.system("") == 0:
-        print("TRANSMISSION ALREADY INSTALLED.")
-        return ''
+    # if os.system("") == 0:
+    #     print("SICK RAGE ALREADY INSTALLED.")
+    #     return ''
     sick_user = hf.input_w_confirmation('Input SiCKRAGE user name: ', 'The SiCKRAGE user will be: ')
     sick_pass = hf.input_w_confirmation('Input SiCKRAGE user password: ', 'The SiCKRAGE password will be: ')
     os.system("sudo apt-get --yes --force-yes install p7zip-full")

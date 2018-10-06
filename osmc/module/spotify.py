@@ -2,9 +2,9 @@ import os
 import helper_functions as hf
 
 def install():
-    if os.system("sudo systemctl status raspotify") == 0:
-        print("TRANSMISSION ALREADY INSTALLED.")
-        return ''
+    # if os.system("sudo systemctl status raspotify") == 0:
+    #     print("SPOTIFY ALREADY INSTALLED.")
+    #     return ''
     os.system("sudo apt-get -y install apt-transport-https")
     os.system("curl -sSL https://dtcooper.github.io/raspotify/key.asc | sudo apt-key add -v -")
     os.system("echo 'deb https://dtcooper.github.io/raspotify jessie main' | sudo tee /etc/apt/sources.list.d/raspotify.list")

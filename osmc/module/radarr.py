@@ -2,7 +2,7 @@ import os
 
 def install(user_name):
     if os.system("sudo systemctl status radarr") == 0:
-        print("TRANSMISSION ALREADY INSTALLED.")
+        print("RADARR ALREADY INSTALLED.")
         return ''
     os.system("sudo apt install mono-devel mediainfo sqlite3 libmono-cil-dev -y")
     os.system("cd /tmp")
