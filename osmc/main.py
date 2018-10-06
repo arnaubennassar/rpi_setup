@@ -24,7 +24,7 @@ if hf.do_you_want('Change password?'):
 
 if hf.do_you_want('Install SPOTIFY connect? (client to use as remote speaker)'):
     print("INSTALLING SPOTIFY!")
-    spotify.install()
+    final_output += spotify.install()
 
 if hf.do_you_want('Install SickRage? (Software to download series)'):
     print("INSTALLING SickRage!")

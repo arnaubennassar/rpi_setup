@@ -82,8 +82,9 @@ def install(disk_name, user_name):
         \"upload-slots-per-torrent\": 14,
         \"utp-enabled\": true
     }"""
-    with open("/etc/transmission-daemon/settings.json", 'w+') as new_file:
+    with open("tmp_settings.json", 'w+') as new_file:
         new_file.write(config_file)
+    os.system("sudo mv tmp_settings.json /etc/transmission-daemon/settings.json")
     os.system("sudo chmod g+rw /media/"+disk_name+"/incomplete_downloads")
     os.system("sudo chgrp -R "+user_name+" /media/"+disk_name+"/DOWNLOADS")
     os.system("sudo usermod -a -G "+user_name+" debian-transmission")

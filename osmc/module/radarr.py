@@ -24,8 +24,9 @@ def install(user_name):
 
     [Install]
     WantedBy=multi-user.target"""
-    with open("/etc/systemd/system/radarr.service", 'w+') as new_file:
+    with open("tmp_radarr", 'w+') as new_file:
         new_file.write(radarr_config)
+    os.system("mv tmp_radarr /etc/systemd/system/radarr.service")
     os.system("sudo systemctl enable radarr")
     os.system("sudo systemctl start radarr")
     return """
