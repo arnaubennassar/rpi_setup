@@ -15,8 +15,9 @@ def install():
     spotify_config = """DEVICE_NAME="""+spotify_name+"""
     BITRATE="320"
     #"""
-    with open("/etc/default/raspotify", 'w+') as new_file:
-        new_file.write(spotify_config)
+    # with open("/etc/default/raspotify", 'w+') as new_file:
+    #     new_file.write(spotify_config)
+    os.system("sudo echo "+spotify_config+" >> /etc/default/raspotify")
     os.system("sudo systemctl restart raspotify")
     return """
     ----- SPOTIFY:
