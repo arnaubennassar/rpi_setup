@@ -46,7 +46,7 @@ if hf.do_you_want('Install CouchPotato? (Software to download movies)'):
     if not transmission_installed:
         final_output += transmission.install(disk_name, user_name)
         transmission_installed = True
-    couchpotato.install()
+    final_output += couchpotato.install()
 
 if hf.do_you_want('Install ZSH? (Cool terminal)'):
     print("INSTALLING ZSH!")

@@ -30,3 +30,7 @@ WantedBy=multi-user.target"""
     os.system("sudo cp ./init/couchpotato.service /etc/systemd/system/couchpotato.service")
     os.system("sudo systemctl enable couchpotato.service")
     os.system("sudo systemctl start couchpotato.service")
+    return """
+    ----- CouchPotato:
+        port: 5050
+    """

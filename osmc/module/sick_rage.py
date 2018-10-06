@@ -23,7 +23,7 @@ def install(user_name):
     os.system("sudo systemctl enable sickrage.service")
     os.system("sudo systemctl start sickrage.service")
     os.system("sudo service sickrage stop")
-    os.system("sudo cd /opt/sickrage/")
+    os.system("cd /opt/sickrage/")
     os.system("""sudo sed -i 's@web_username = ""@web_username = """+'"'+sick_user+'"'+"""@g' config.ini""")
     os.system("""sudo sed -i 's@web_password = ""@web_password = """+'"'+sick_pass+'"'+"""@g' config.ini""")
     os.system("sudo service sickrage start")

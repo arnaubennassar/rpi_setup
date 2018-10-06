@@ -7,7 +7,7 @@ def install(user_name):
     os.system("sudo apt install mono-devel mediainfo sqlite3 libmono-cil-dev -y")
     os.system("cd /tmp")
     os.system("wget https://github.com/Radarr/Radarr/releases/download/v0.2.0.1120/Radarr.develop.0.2.0.1120.linux.tar.gz")
-    os.system("tar -xvf Radarr* -C /opt/")
+    os.system("sudo tar -xvf Radarr* -C /opt/")
     os.system("sudo chown -R osmc:osmc /opt/Radarr")
     radarr_config = """[Unit]
     Description=Radarr Daemon
