@@ -1,3 +1,6 @@
+import helper_functions as hf
+import os
+
 def install(user_name):
     if os.system("") == 0:
         print("TRANSMISSION ALREADY INSTALLED.")

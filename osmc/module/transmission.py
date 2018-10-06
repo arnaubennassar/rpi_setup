@@ -1,6 +1,6 @@
 import os
-import getpass
 import helper_functions as hf
+
 def install(disk_name, user_name):
     if os.system("transmission-daemon -V") == 0:
         print("TRANSMISSION ALREADY INSTALLED.")
@@ -86,7 +86,7 @@ def install(disk_name, user_name):
         new_file.write(config_file)
     os.system("sudo chmod g+rw /media/"+disk_name+"/incomplete_downloads")
     os.system("sudo chgrp -R "+user_name+" /media/"+disk_name+"/DOWNLOADS")
-    os.system("sudo usermod -a -G +getpass.getuser()+ debian-transmission")
+    os.system("sudo usermod -a -G "+user_name+" debian-transmission")
     os.system("sudo /etc/init.d/transmission-daemon start")
 
     return """

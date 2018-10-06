@@ -1,4 +1,5 @@
 import os
+import helper_functions as hf
 
 def install():
     if os.system("sudo systemctl status raspotify") == 0:
