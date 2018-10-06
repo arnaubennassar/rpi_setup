@@ -9,6 +9,11 @@ def install(disk_name, user_name):
     transmission_user = hf.input_w_confirmation('Input transmission user name: ', 'The transmission user will be: ')
     transmission_pass = hf.input_w_confirmation('Input transmission user password: ', 'The transmission password will be: ')
     os.system("sudo apt-get install transmission-daemon -y")
+    os.system("sudo chmod g+rw /media/"+disk_name+"/incomplete_downloads")
+    os.system("sudo chgrp -R "+user_name+" /media/"+disk_name+"/DOWNLOADS")
+    os.system("sudo usermod -a -G "+user_name+" debian-transmission")
+    os.system("sudo /etc/init.d/transmission-daemon start")
+    os.system("sudo /etc/init.d/transmission-daemon stop")
     config_file = """{
         \"alt-speed-down\": 50,
         \"alt-speed-enabled\": false,
@@ -85,10 +90,8 @@ def install(disk_name, user_name):
     with open("tmp_settings.json", 'w+') as new_file:
         new_file.write(config_file)
     os.system("sudo mv tmp_settings.json /etc/transmission-daemon/settings.json")
-    os.system("sudo chmod g+rw /media/"+disk_name+"/incomplete_downloads")
-    os.system("sudo chgrp -R "+user_name+" /media/"+disk_name+"/DOWNLOADS")
-    os.system("sudo usermod -a -G "+user_name+" debian-transmission")
     os.system("sudo /etc/init.d/transmission-daemon start")
+
 
     return """
     ----- TRANSMISSION:
