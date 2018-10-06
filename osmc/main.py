@@ -34,12 +34,12 @@ if hf.do_you_want('Install SickRage? (Software to download series)'):
         transmission_installed = True
     final_output += sick_rage.install(user_name)
 
-if hf.do_you_want('Install RADARR? (Software to download movies)'):
-    print("INSTALLING RADARR!")
-    if not transmission_installed:
-        final_output += transmission.install(disk_name, user_name)
-        transmission_installed = True
-    final_output += radarr.install(user_name)
+# if hf.do_you_want('Install RADARR? (Software to download movies)'):
+#     print("INSTALLING RADARR!")
+#     if not transmission_installed:
+#         final_output += transmission.install(disk_name, user_name)
+#         transmission_installed = True
+#     final_output += radarr.install(user_name)
 
 if hf.do_you_want('Install CouchPotato? (Software to download movies)'):
     print("INSTALLING CouchPotato!")

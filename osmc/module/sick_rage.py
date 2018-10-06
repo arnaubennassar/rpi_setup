@@ -12,7 +12,7 @@ def install(user_name):
     os.system("sudo dpkg -i unrar_5.2.6-1_armhf.deb")
     os.system("rm  unrar_5.2.6-1_armhf.deb")
     os.system("sudo useradd sickrage")
-    os.system("sudo usermod -a -G "+user_name+" sickrage")
+    os.system("sudo usermod -a -G osmc sickrage")
     os.system("sudo git clone https://github.com/SiCKRAGE/SickRage.git /opt/sickrage")
     os.system("sudo cp /opt/sickrage/runscripts/init.systemd /etc/systemd/system/sickrage.service")
     os.system("sudo chown -R sickrage:sickrage /opt/sickrage")

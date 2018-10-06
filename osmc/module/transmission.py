@@ -2,9 +2,9 @@ import os
 import helper_functions as hf
 
 def install(disk_name, user_name):
-    if os.system("transmission-daemon -V") == 0:
-        print("TRANSMISSION ALREADY INSTALLED.")
-        return ''
+    # if os.system("transmission-daemon -V") == 0:
+    #     print("TRANSMISSION ALREADY INSTALLED.")
+    #     return ''
     print("FIRST LETS INSTALL TRANSMISSION")
     transmission_user = hf.input_w_confirmation('Input transmission user name: ', 'The transmission user will be: ')
     transmission_pass = hf.input_w_confirmation('Input transmission user password: ', 'The transmission password will be: ')

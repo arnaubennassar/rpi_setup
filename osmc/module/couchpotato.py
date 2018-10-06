@@ -1,12 +1,12 @@
 import os
 
 def install():
-    # os.system("sudo useradd couchpotato")
-    # os.system("sudo usermod -a -G osmc couchpotato")
-    # os.system("sudo mkdir /home/couchpotato")
-    # os.system("sudo chown -R couchpotato:couchpotato /home/couchpotato")
-    # os.system("sudo git clone http://github.com/RuudBurger/CouchPotatoServer /opt/CouchPotatoServer")
-    # os.system("sudo chown -R couchpotato:couchpotato /opt/CouchPotatoServer")
+    os.system("sudo useradd couchpotato")
+    os.system("sudo usermod -a -G osmc couchpotato")
+    os.system("sudo mkdir /home/couchpotato")
+    os.system("sudo chown -R couchpotato:couchpotato /home/couchpotato")
+    os.system("sudo git clone http://github.com/RuudBurger/CouchPotatoServer /opt/CouchPotatoServer")
+    os.system("sudo chown -R couchpotato:couchpotato /opt/CouchPotatoServer")
     os.system("sudo cp /opt/CouchPotatoServer/init/couchpotato.fedora.service /opt/CouchPotatoServer/init/couchpotato.service")
     cp_config = """
     [Unit]
