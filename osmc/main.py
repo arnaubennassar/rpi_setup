@@ -44,7 +44,6 @@ if hf.do_you_want('Install CouchPotato? (Software to download movies)'):
 
 if hf.do_you_want('Install next nextcloudpi? (kinda google drive)'):
     print("INSTALLING Next Cloud!")
-        transmission_installed = True
     final_output += next_cloud.install()
 
 # if hf.do_you_want('Install RADARR? (Software to download movies)'):
