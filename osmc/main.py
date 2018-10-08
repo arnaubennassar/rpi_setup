@@ -6,6 +6,7 @@ import module.transmission as transmission
 import module.sick_rage as sick_rage
 import module.radarr as radarr
 import module.couchpotato as couchpotato
+import module.next_cloud as next_cloud
 import module.zsh as zsh
 
 transmission_installed = False
@@ -34,19 +35,24 @@ if hf.do_you_want('Install SickRage? (Software to download series)'):
         transmission_installed = True
     final_output += sick_rage.install(user_name)
 
-# if hf.do_you_want('Install RADARR? (Software to download movies)'):
-#     print("INSTALLING RADARR!")
-#     if not transmission_installed:
-#         final_output += transmission.install(disk_name, user_name)
-#         transmission_installed = True
-#     final_output += radarr.install(user_name)
-
 if hf.do_you_want('Install CouchPotato? (Software to download movies)'):
     print("INSTALLING CouchPotato!")
     if not transmission_installed:
         final_output += transmission.install(disk_name, user_name)
         transmission_installed = True
     final_output += couchpotato.install()
+
+if hf.do_you_want('Install next nextcloudpi? (kinda google drive)'):
+    print("INSTALLING Next Cloud!")
+        transmission_installed = True
+    final_output += next_cloud.install()
+
+# if hf.do_you_want('Install RADARR? (Software to download movies)'):
+#     print("INSTALLING RADARR!")
+#     if not transmission_installed:
+#         final_output += transmission.install(disk_name, user_name)
+#         transmission_installed = True
+#     final_output += radarr.install(user_name)
 
 # if hf.do_you_want('Install ZSH? (Cool terminal)'):
 #     print("INSTALLING ZSH!")
