@@ -1,7 +1,7 @@
 import helper_functions as hf
 import os
 
-def install(sick_user, sick_pass, download_dir, rename_dir, trakt_user, torrent_pass, torrent_pass):
+def install(sick_user, sick_pass, download_dir, rename_dir, trakt_user, torrent_user, torrent_pass):
     os.system("sudo apt-get --yes --force-yes install p7zip-full")
     os.system("wget http://sourceforge.net/projects/bananapi/files/unrar_5.2.6-1_armhf.deb")
     os.system("sudo dpkg -i unrar_5.2.6-1_armhf.deb")
