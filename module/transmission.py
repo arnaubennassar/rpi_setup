@@ -1,7 +1,7 @@
 import os
 import helper_functions as hf
 
-def install(disk_name, transmission_user, transmission_pass):
+def install(disk_name, transmission_user, transmission_pass, download_dir):
     # if os.system("transmission-daemon -V") == 0:
     #     print("TRANSMISSION ALREADY INSTALLED.")
     #     return ''
@@ -26,7 +26,7 @@ def install(disk_name, transmission_user, transmission_pass):
         \"blocklist-url\": \"http://www.example.com/blocklist\",
         \"cache-size-mb\": 10,
         \"dht-enabled\": true,
-        \"download-dir\": \"/media/"""+disk_name+"""/DOWNLOADS\",
+        \"download-dir\": \""""+download_dir+"""\",
         \"download-limit\": 100,
         \"download-limit-enabled\": 0,
         \"download-queue-enabled\": true,

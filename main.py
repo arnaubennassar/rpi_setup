@@ -14,6 +14,10 @@ transmission_installed = False
 user_name = getpass.getuser()
 final_output = ''
 
+#SETUP DIRECTORIES
+os.system("mkdir "+c.download_dir)
+os.system("mkdir "+c.series_dir)
+os.system("mkdir "+c.movies_dir)
 #INSTALL MANDATORY STUFF
 os.system("sudo apt-get update")
 if os.system("git --version") != 0:
@@ -27,25 +31,25 @@ if c.install_spotify == 'yes':
 if c.install_sickrage == 'yes':
     print("INSTALLING SickRage!")
     if not transmission_installed:
-        final_output += transmission.install(c.disk_name, c.transmission_user, c.transmission_pass)
+        final_output += transmission.install(c.disk_name, c.transmission_user, c.transmission_pass, c.download_dir)
         transmission_installed = True
     final_output += sick_rage.install(c.sickrage_name, c.sickrage_pass, c.download_dir, c.series_dir, c.trakt_user, c.transmission_user, c.transmission_pass)
 
-if hf.do_you_want('Install CouchPotato? (Software to download movies)'):
+if c.install_potato == 'yes':
     print("INSTALLING CouchPotato!")
     if not transmission_installed:
-        final_output += transmission.install(c.disk_name, c.transmission_user, c.transmission_pass)
+        final_output += transmission.install(c.disk_name, c.transmission_user, c.transmission_pass, c.download_dir)
         transmission_installed = True
     final_output += couchpotato.install()
 
-if hf.do_you_want('Install next nextcloudpi? (kinda google drive)'):
+if c.install_nextcloudpi == 'yes':
     print("INSTALLING Next Cloud!")
     final_output += next_cloud.install()
 
 # if hf.do_you_want('Install RADARR? (Software to download movies)'):
 #     print("INSTALLING RADARR!")
 #     if not transmission_installed:
-#         final_output += transmission.install(c.disk_name, user_name)
+#         final_output += transmission.install(c.disk_name, user_name, c.download_dir)
 #         transmission_installed = True
 #     final_output += radarr.install(user_name)
 

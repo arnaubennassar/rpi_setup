@@ -1,7 +1,7 @@
 import helper_functions as hf
 import os
 
-def install(sick_user, sick_pass, download_dir, rename_dir, trakt_user, torrent_user, torrent_pass):
+def install(sick_user, sick_pass, download_dir, rename_dir, trakt_user, torrent_pass, torrent_pass):
     os.system("sudo apt-get --yes --force-yes install p7zip-full")
     os.system("wget http://sourceforge.net/projects/bananapi/files/unrar_5.2.6-1_armhf.deb")
     os.system("sudo dpkg -i unrar_5.2.6-1_armhf.deb")
@@ -13,14 +13,20 @@ def install(sick_user, sick_pass, download_dir, rename_dir, trakt_user, torrent_
     os.system("sudo chown -R sickrage:sickrage /opt/sickrage")
     os.system("sudo chmod +x /opt/sickrage")
     os.system("sudo chmod a-x /etc/systemd/system/sickrage.service")
-    os.system("cd /etc/systemd/system")
+    # os.system("cd /etc/systemd/system")
+    os.system("sudo mv /etc/systemd/system/sickrage.service .")
     os.system("sudo sed -i 's@/usr/bin/python2.7 /opt/sickrage/SickBeard.py -q --daemon --nolaunch --datadir=/opt/sickrage@/opt/sickrage/SickBeard.py -q --daemon --nolaunch --datadir=/opt/sickrage@g' sickrage.service")
+    os.system("sudo mv sickrage.service /etc/systemd/system/sickrage.service")
     os.system("sudo systemctl enable sickrage.service")
     os.system("sudo systemctl start sickrage.service")
     os.system("sudo service sickrage stop")
-    os.system("cd /opt/sickrage/")
+    os.system("sudo mv /opt/sickrage/config.ini .")
     os.system("""sudo sed -i 's@web_username = ""@web_username = """+'"'+sick_user+'"'+"""@g' config.ini""")
     os.system("""sudo sed -i 's@web_password = ""@web_password = """+'"'+sick_pass+'"'+"""@g' config.ini""")
+    os.system("sudo mv conig.ini /opt/sickrage/config.ini")
+    # with open("tmp_sickrage", 'w+') as new_file:
+    #     new_file.write(gen_config_file(sick_user, sick_pass, download_dir, rename_dir, trakt_user, torrent_pass))
+    # os.system("sudo mv tmp_sickrage /opt/sickrage/config.ini")
     os.system("sudo service sickrage start")
     return """
     ----- SiCKRAGE:

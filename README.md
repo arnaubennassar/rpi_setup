@@ -1,5 +1,7 @@
 #Instructions for OSMC set up:
 
+0. Prepare DISK: format disk: sudo fdisk -l     sudo umount /dev/sda1       sudo mkfs.ext4 /dev/sda1 -L disk
+
 1. Update the software:
 > sudo apt-get update
 
@@ -18,7 +20,7 @@
 6. move to the folder:
 > cd rpi_setup
 
-7. Duplicate the file config_template.py with the name config.py, and edit the new document with your set up preferences 
+7. Duplicate the file config_template.py with the name config.py, and edit the new document with your set up preferences
 
 8. execute the script:
 > pyhton main.py
