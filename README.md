@@ -1,7 +1,7 @@
 #Instructions for OSMC set up:
 
-1. Change default password:
-> passwd
+1. Update the software:
+> sudo apt-get update
 
 2. Install git:
 > sudo apt-get install git -y
@@ -16,10 +16,9 @@
 > git clone https://github.com/arnaubennassar/rpi_setup.git
 
 6. move to the folder:
-> cd osmc
+> cd rpi_setup
 
-7. execute the script:
-> sudo sh main.sh
+7. Duplicate the file config_template.py with the name config.py, and edit the new document with your set up preferences 
 
-##If you've installed sickrage or sonarr:
-1. set up transmission
+8. execute the script:
+> pyhton main.py

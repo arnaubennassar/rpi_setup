@@ -1,7 +1,7 @@
 import os
 import helper_functions as hf
 
-def install():
+def install(spotify_name):
     # if os.system("sudo systemctl status raspotify") == 0:
     #     print("SPOTIFY ALREADY INSTALLED.")
     #     return ''
@@ -11,7 +11,6 @@ def install():
     os.system("sudo apt-get update")
     os.system("sudo apt-get install apt-transport-https")
     os.system("sudo apt-get -y install raspotify")
-    spotify_name = hf.input_w_confirmation('Spotify device display name: ', 'The spotify name will be: ')
     spotify_config = """DEVICE_NAME="""+spotify_name+"""
     BITRATE="320"
     #"""
