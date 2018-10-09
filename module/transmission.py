@@ -2,9 +2,9 @@ import os
 import helper_functions as hf
 
 def install(disk_name, transmission_user, transmission_pass, download_dir):
-    # if os.system("transmission-daemon -V") == 0:
-    #     print("TRANSMISSION ALREADY INSTALLED.")
-    #     return ''
+    if os.system("transmission-daemon -V") == 0:
+        print("TRANSMISSION ALREADY INSTALLED.")
+        return ''
     print("FIRST LETS INSTALL TRANSMISSION")
     os.system("sudo apt-get install transmission-daemon -y")
     os.system("sudo chmod g+rw /media/"+disk_name+"/incomplete_downloads")
