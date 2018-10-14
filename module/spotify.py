@@ -18,6 +18,10 @@ def install(spotify_name):
         new_file.write(spotify_config)
     os.system("sudo mv tmp_raspotify /etc/default/raspotify")
     os.system("sudo systemctl restart raspotify")
+    with open("tmp_raspotify_kodi", 'w+') as new_file:
+        new_file.write("raspotify\\raspotify.service")
+    os.system("sudo mv tmp_raspotify_kodi /etc/osmc/apps.d/spotify-connect")
+
     return """
     ----- SPOTIFY:
         device name: """+spotify_name+"""

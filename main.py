@@ -28,6 +28,19 @@ if c.install_spotify == 'yes':
     print("INSTALLING SPOTIFY!")
     final_output += spotify.install(c.spotify_name)
 
+if c.install_flexget == 'yes':
+    print("INSTALLING SickRage!")
+    if not transmission_installed:
+        final_output += transmission.install(c.disk_name, c.transmission_user, c.transmission_pass, c.download_dir)
+        transmission_installed = True
+    os.system("mkdir ~/flexget")
+    os.system("cp module/flexget/secrets.yml ~/flexget/secrets.yml")
+    os.system("cp module/flexget/secrets.yml ~/flexget/config.yml")
+    os.system("cp module/flexget/plugins ~/flexget/plugins")
+    os.systems("cd module/flexget")
+    os.systems("bash autosetup.sh")
+    # final_output += sick_rage.install(c.sickrage_name, c.sickrage_pass, c.download_dir, c.series_dir, c.trakt_user, c.transmission_user, c.transmission_pass)
+
 if c.install_sickrage == 'yes':
     print("INSTALLING SickRage!")
     if not transmission_installed:
