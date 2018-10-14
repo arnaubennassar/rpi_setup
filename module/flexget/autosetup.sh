@@ -32,10 +32,10 @@ DisableLEDS=0    #RPI2 or RPI3 only
 ##                                      ##
 ##########################################
 #User-specific settings
-HomeFolder='/home/osmc'    #make sure you enter your correct homefolder here!
-MediaFolder='/media/disk'    #enter the path+root of your USB drive or location of your NFS mount ('/mnt/name')
+HomeFolder=/home/osmc    #make sure you enter your correct homefolder here!
+MediaFolder=/media/disk    #enter the path+root of your USB drive or location of your NFS mount ('/mnt/name')
 dyndnsurl="http://sync.afraid.org/u/your-url-id/"
-TraktUser='yourtraktusername'
+TraktUser=yourtraktusername
 TransmissionUser=desiredusername
 TransmissionPw=desiredpw
 SpotifyDeviceName=YourDeviceName   # pick a name, it will show up in the Spotify app on your phone or computer.
@@ -62,7 +62,7 @@ fi
 
 # Add media to Kodi
 if [ "$AddMediaToKodi" = "1" ] ; then
-sudo bash -c 'cat > $HomeFolder/.kodi/userdata/sources.xml' << EOF
+sudo bash -c "cat > $HomeFolder/.kodi/userdata/sources.xml" << EOF
 <sources>
     <programs>
         <default pathversion="1"></default>

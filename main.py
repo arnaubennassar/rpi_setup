@@ -8,6 +8,7 @@ import module.radarr as radarr
 import module.couchpotato as couchpotato
 import module.next_cloud as next_cloud
 import module.zsh as zsh
+import module.plex as plex
 import config as c
 
 transmission_installed = False
@@ -34,7 +35,7 @@ if c.install_flexget == 'yes':
     if not transmission_installed:
         final_output += transmission.install(c.disk_name, c.transmission_user, c.transmission_pass, c.download_dir)
         transmission_installed = True
-    os.system("mkdir ~/flexget")
+    os.system("mkdir /home/osmc/flexget")
     os.system("cp /home/osmc/Documents/rpi_setup/module/flexget/autosetup.sh ~/flexget/autosetup.sh")
     os.system("cp /home/osmc/Documents/rpi_setup/module/flexget/secrets.yml ~/flexget/secrets.yml")
     os.system("cp /home/osmc/Documents/rpi_setup/module/flexget/config.yml ~/flexget/config.yml")
@@ -45,9 +46,10 @@ if c.install_flexget == 'yes':
     os.system("sudo systemctl stop transmission")
     os.system("mkdir -p ~/.config/transmission/")
     os.system("cd ~/.config/transmission")
-    with open("/home/osmc/.config/transmission/runflexget.sh", 'w') as new_file:
+    with open("runflexget.sh", 'w') as new_file:
         new_file.write("~/flexget/bin/flexget execute --tasks find-* move-*")
-    os.system("chmod +x runflexget.sh")
+    os.system("sudo mv runflexget.sh /home/osmc/.config/transmission/runflexget.sh")
+    os.system("chmod +x /home/osmc/.config/transmission/runflexget.sh")
     os.system("sudo systemctl start transmission")
     os.system("/bin/flexget trakt auth "+c.trakt_user)
     os.system("~/flexget/bin/flexget execute --now")
@@ -71,6 +73,10 @@ if c.install_potato == 'yes':
 if c.install_nextcloudpi == 'yes':
     print("INSTALLING Next Cloud!")
     final_output += next_cloud.install()
+
+if c.install_plex == 'yes':
+    print("INSTALLING PLEX!")
+    final_output += plex.install()
 
 # if hf.do_you_want('Install RADARR? (Software to download movies)'):
 #     print("INSTALLING RADARR!")
