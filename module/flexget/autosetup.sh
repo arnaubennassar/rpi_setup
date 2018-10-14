@@ -33,7 +33,7 @@ DisableLEDS=0    #RPI2 or RPI3 only
 ##########################################
 #User-specific settings
 HomeFolder='/home/osmc'    #make sure you enter your correct homefolder here!
-MediaFolder='/media/yourusbdrive'    #enter the path+root of your USB drive or location of your NFS mount ('/mnt/name')
+MediaFolder='/media/disk'    #enter the path+root of your USB drive or location of your NFS mount ('/mnt/name')
 dyndnsurl="http://sync.afraid.org/u/your-url-id/"
 TraktUser='yourtraktusername'
 TransmissionUser=desiredusername

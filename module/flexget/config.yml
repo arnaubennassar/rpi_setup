@@ -36,7 +36,7 @@ templates:
         propers: 48 hours
         specials: no
         season_packs: 3
-#        tracking: backfill
+        tracking: backfill
     content_size:
       min: 100
     content_filter:
@@ -70,6 +70,13 @@ templates:
       min: 900
       max: 8000
 
+  movies-UQ:
+    tmdb_lookup: yes
+    movie_list: trakt-movies
+    content_size:
+      min: 2000
+      max: 30000
+
 ##### Transmission config#
   transmission-anchors:
     _transmission-settings: &transmission-settings
@@ -88,7 +95,6 @@ templates:
         - \b3d\b
         - \bfre(nch)?\b
         - \bita(lian)?\b
-        - \bspa(nish)?\b
         - \bger(man)?\b
         - \bcastellano\b
         - \brus(sian)?\b
@@ -98,6 +104,7 @@ templates:
       reject:
         - '*.rar'
         - '*.zip'
+        - '*.cam'
 
 
 ##### ADVANCED SETTINGS #####
@@ -548,6 +555,41 @@ tasks:
     priority: 16
     template:
       - movies-LQ
+      - reject
+      - torrents
+      - transmission-movies
+    exists_movie:
+      - "/{? folder.root ?}{? folder.downmovies ?}"
+      - "/{? folder.root ?}{? folder.movies ?}"
+    magnets: yes
+    convert_magnet:
+      timeout: 120 seconds
+      force: yes
+    seen: local
+    discover:
+      release_estimations: loose
+      interval: 15 minutes
+      what:
+        - movie_list: trakt-movies
+      from:
+        - piratebay:
+            category: highres movies
+        - limetorrents:
+            category: movies
+    list_match:
+      from:
+        - movie_list: trakt-movies
+    list_remove:
+      - trakt_list:
+          account: "{? trakt.account ?}"
+          list: "{? trakt.movies ?}"
+          type: movies
+
+##### Discover and download lower quality/bitrate movies (1-8GB 720p), if the movie is not recent#
+  download-movies-UQ-discover:
+    priority: 16
+    template:
+      - movies-UQ
       - reject
       - torrents
       - transmission-movies

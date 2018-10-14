@@ -16,6 +16,7 @@ final_output = ''
 
 #SETUP DIRECTORIES
 os.system("mkdir "+c.download_dir)
+os.system("mkdir "+c.download_dir+"/tempmedia")
 os.system("mkdir "+c.series_dir)
 os.system("mkdir "+c.movies_dir)
 #INSTALL MANDATORY STUFF
@@ -48,6 +49,9 @@ if c.install_flexget == 'yes':
         new_file.write("~/flexget/bin/flexget execute --tasks find-* move-*")
     os.system("chmod +x runflexget.sh")
     os.system("sudo systemctl start transmission")
+    os.system("/bin/flexget trakt auth "+c.trakt_user)
+    os.system("~/flexget/bin/flexget execute --now")
+    os.system("sudo systemctl start flexget")
     # final_output += sick_rage.install(c.sickrage_name, c.sickrage_pass, c.download_dir, c.series_dir, c.trakt_user, c.transmission_user, c.transmission_pass)
 
 if c.install_sickrage == 'yes':
