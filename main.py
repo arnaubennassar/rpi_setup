@@ -34,15 +34,17 @@ if c.install_flexget == 'yes':
         final_output += transmission.install(c.disk_name, c.transmission_user, c.transmission_pass, c.download_dir)
         transmission_installed = True
     os.system("mkdir ~/flexget")
+    os.system("cp /home/osmc/Documents/rpi_setup/module/flexget/autosetup.sh ~/flexget/autosetup.sh")
     os.system("cp /home/osmc/Documents/rpi_setup/module/flexget/secrets.yml ~/flexget/secrets.yml")
-    os.system("cp /home/osmc/Documents/rpi_setup/module/flexget/secrets.yml ~/flexget/config.yml")
+    os.system("cp /home/osmc/Documents/rpi_setup/module/flexget/config.yml ~/flexget/config.yml")
     os.system("cp -r /home/osmc/Documents/rpi_setup/module/flexget/plugins ~/flexget/plugins")
     os.system("cd /home/osmc/Documents/rpi_setup/module/flexget")
     os.system('sed -i "s/yourtraktusername/'+c.trakt_user+'/g" /home/osmc/flexget/autosetup.sh')
     os.system("bash ~/flexget/autosetup.sh")
     os.system("sudo systemctl stop transmission")
+    os.system("mkdir -p ~/.config/transmission/")
     os.system("cd ~/.config/transmission")
-    with open("~/.config/transmission/runflexget.sh", 'w+') as new_file:
+    with open("/home/osmc/.config/transmission/runflexget.sh", 'w') as new_file:
         new_file.write("~/flexget/bin/flexget execute --tasks find-* move-*")
     os.system("chmod +x runflexget.sh")
     os.system("sudo systemctl start transmission")
