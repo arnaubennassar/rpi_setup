@@ -2,7 +2,10 @@
 
 0. change remote port to 9999
 
-0. Prepare DISK: format disk: sudo fdisk -l     sudo umount /dev/sda1       sudo mkfs.ext4 /dev/sda1 -L disk
+0. Prepare DISK: format disk:
+> sudo fdisk -l     
+> sudo umount /dev/sda1       
+> sudo mkfs.ext4 /dev/sda1 -L disk
 
 1. Update the software:
 > sudo apt-get update

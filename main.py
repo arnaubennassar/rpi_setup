@@ -29,16 +29,23 @@ if c.install_spotify == 'yes':
     final_output += spotify.install(c.spotify_name)
 
 if c.install_flexget == 'yes':
-    print("INSTALLING SickRage!")
+    print("INSTALLING FLEXGET!")
     if not transmission_installed:
         final_output += transmission.install(c.disk_name, c.transmission_user, c.transmission_pass, c.download_dir)
         transmission_installed = True
     os.system("mkdir ~/flexget")
-    os.system("cp module/flexget/secrets.yml ~/flexget/secrets.yml")
-    os.system("cp module/flexget/secrets.yml ~/flexget/config.yml")
-    os.system("cp -r module/flexget/plugins ~/flexget/plugins")
-    os.system("cd module/flexget")
-    os.system("bash autosetup.sh")
+    os.system("cp /home/osmc/Documents/rpi_setup/module/flexget/secrets.yml ~/flexget/secrets.yml")
+    os.system("cp /home/osmc/Documents/rpi_setup/module/flexget/secrets.yml ~/flexget/config.yml")
+    os.system("cp -r /home/osmc/Documents/rpi_setup/module/flexget/plugins ~/flexget/plugins")
+    os.system("cd /home/osmc/Documents/rpi_setup/module/flexget")
+    os.system('sed -i "s/yourtraktusername/'+c.trakt_user+'/g" /home/osmc/flexget/autosetup.sh')
+    os.system("bash ~/flexget/autosetup.sh")
+    os.system("sudo systemctl stop transmission")
+    os.system("cd ~/.config/transmission")
+    with open("~/.config/transmission/runflexget.sh", 'w+') as new_file:
+        new_file.write("~/flexget/bin/flexget execute --tasks find-* move-*")
+    os.system("chmod +x runflexget.sh")
+    os.system("sudo systemctl start transmission")
     # final_output += sick_rage.install(c.sickrage_name, c.sickrage_pass, c.download_dir, c.series_dir, c.trakt_user, c.transmission_user, c.transmission_pass)
 
 if c.install_sickrage == 'yes':
