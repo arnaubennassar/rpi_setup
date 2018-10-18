@@ -703,8 +703,8 @@ tasks:
     kodi_library:
       action: scan
       category: video
-      url: http://192.168.1.1
-      port: 8080
+      url: http://localhost
+      port: 9999
     list_add:
       - subtitle_list:
           list: subtitles
@@ -824,8 +824,8 @@ tasks:
     kodi_library:
       action: scan
       category: video
-      url: http://192.168.1.1
-      port: 8080
+      url: http://localhost
+      port: 9999
     list_add:
       - subtitle_list:
           list: subtitles
@@ -914,5 +914,5 @@ tasks:
     kodi_library:
       action: clean
       category: video
-      url: http://192.168.1.1
-      port: 8080
+      url: http://localhost
+      port: 9999
